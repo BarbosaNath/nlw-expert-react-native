@@ -20,6 +20,7 @@ export default function Cart() {
   return (
     <View className="flex-1 pt-8">
       <Header title="Seu carrinho" />
+      <KeyboardAwareScrollView>
         <ScrollView>
           <View className="p-5 flex-1">
             {cartStore.products.length > 0 ? (
@@ -46,6 +47,7 @@ export default function Cart() {
             <Input placeholder="Informe o endereço de entrega com rua, bairro, CEP, número e complemento..." />
           </View>
         </ScrollView>
+      </KeyboardAwareScrollView>
     </View>
   );
 }
