@@ -1,6 +1,7 @@
 import { View, Image, Text } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { PRODUCTS } from "@/utils/data/products";
+import { formatCurrency } from "@/utils/functions/format-currency";
 
 export default function Product() {
   const { id } = useLocalSearchParams();
@@ -16,8 +17,21 @@ export default function Product() {
       />
       <View className="p-5 mt-8 flex-1">
         <Text className="text-lime-400 text-2xl font-heading my-2">
-          {product.price}
+          {formatCurrency(product.price)}
         </Text>
+
+        <Text className="text-slate-400 font-body text-base leading-6 mb-6">
+          {product.description}
+        </Text>
+
+        {product.ingredients.map((ingredient) => (
+          <Text
+            key={ingredient}
+            className="text-slate-400 font-body text-base leading-6"
+          >
+            {"\u2022"} {ingredient}
+          </Text>
+        ))}
       </View>
     </View>
   );
