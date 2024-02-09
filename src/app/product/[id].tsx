@@ -10,7 +10,7 @@ import { useCartStore } from "@/store/cart-store";
 
 export default function Product() {
   const cartStore = useCartStore();
-  const useNavigation = useNavigation();
+  const navigation = useNavigation();
   const { id } = useLocalSearchParams();
 
   const product = PRODUCTS.find((item) => item.id === id);
@@ -35,6 +35,8 @@ export default function Product() {
       />
 
       <View className="p-5 mt-8 flex-1">
+        <Text className="text-white text-xl font-heading">{product.title}</Text>
+         
         <Text className="text-lime-400 text-2xl font-heading my-2">
           {formatCurrency(product.price)}
         </Text>
