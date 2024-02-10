@@ -1,5 +1,5 @@
 import Header from "@/components/header";
-import { View, Text, ScrollView, Alert } from "react-native";
+import { View, Text, ScrollView, Alert, Linking } from "react-native";
 import { Product } from "@/components/product";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
@@ -47,8 +47,8 @@ export default function Cart() {
 
       \n Valor total: ${total}
     `;
+    
 
-    console.log(message)
     cartStore.clear();
     navigation.goBack()
   }
@@ -87,6 +87,9 @@ export default function Cart() {
             <Input
               placeholder="Informe o endereço de entrega com rua, bairro, CEP, número e complemento..."
               onChangeText={setAddress}
+              blurOnSubmit={true}
+              onSubmitEditing={handleOrder}
+              returnKeyType="next"
             />
           </View>
         </ScrollView>
