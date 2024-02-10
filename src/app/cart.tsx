@@ -6,6 +6,9 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { useCartStore } from "@/store/cart-store";
 import { formatCurrency } from "@/utils/functions/format-currency";
 import { Input } from "@/components/input";
+import { Button } from "@/components/button";
+import { Feather } from "@expo/vector-icons";
+import { LinkButton } from "@/components/link-button";
 
 export default function Cart() {
   const cartStore = useCartStore();
@@ -48,6 +51,17 @@ export default function Cart() {
           </View>
         </ScrollView>
       </KeyboardAwareScrollView>
+
+      <View className="p-5 gap-5">
+        <Button>
+          <Button.Text>Enviar pedido</Button.Text>
+          <Button.Icon>
+            <Feather name="arrow-right-circle" />
+          </Button.Icon>
+        </Button>
+
+        <LinkButton title="Voltar ao cardápio" href="/" />
+      </View>
     </View>
   );
 }
