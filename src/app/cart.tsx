@@ -10,10 +10,12 @@ import { Button } from "@/components/button";
 import { Feather } from "@expo/vector-icons";
 import { LinkButton } from "@/components/link-button";
 import { useState } from "react";
+import { useNavigation } from "expo-router";
 
 export default function Cart() {
   const cartStore = useCartStore();
   const [address, setAddress] = useState("");
+  const navigation = useNavigation();
 
   const total = formatCurrency(
     cartStore.products.reduce(
@@ -45,6 +47,10 @@ export default function Cart() {
 
       \n Valor total: ${total}
     `;
+
+    console.log(message)
+    cartStore.clear();
+    navigation.goBack()
   }
 
   return (
