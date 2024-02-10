@@ -9,9 +9,11 @@ import { Input } from "@/components/input";
 import { Button } from "@/components/button";
 import { Feather } from "@expo/vector-icons";
 import { LinkButton } from "@/components/link-button";
+import { useState } from "react";
 
 export default function Cart() {
   const cartStore = useCartStore();
+  const [address, setAddress] = useState("");
 
   const total = formatCurrency(
     cartStore.products.reduce(
@@ -25,6 +27,24 @@ export default function Cart() {
       { text: "Cancelar" },
       { text: "Remover", onPress: () => cartStore.remove(product.id) },
     ]);
+  }
+
+  function handleOrder() {
+    if (address.trim().length === 0) {
+      return Alert.alert("Pedido", "Informe os dados da entrega.");
+    }
+
+    const products = cartStore.products
+      .map((product) => `\n %{product.quantity} ${product.title}`)
+      .join("");
+
+    const message = ` 🍔 NOVO PEDIDO
+      \n Entregar em: ${address}
+
+      ${products}
+
+      \n Valor total: ${total}
+    `;
   }
 
   return (
@@ -58,13 +78,16 @@ export default function Cart() {
               </Text>
             </View>
 
-            <Input placeholder="Informe o endereço de entrega com rua, bairro, CEP, número e complemento..." />
+            <Input
+              placeholder="Informe o endereço de entrega com rua, bairro, CEP, número e complemento..."
+              onChangeText={setAddress}
+            />
           </View>
         </ScrollView>
       </KeyboardAwareScrollView>
 
       <View className="p-5 gap-5">
-        <Button>
+        <Button onPress={handleOrder}>
           <Button.Text>Enviar pedido</Button.Text>
           <Button.Icon>
             <Feather name="arrow-right-circle" />
