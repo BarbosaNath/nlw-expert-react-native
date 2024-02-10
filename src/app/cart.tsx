@@ -12,6 +12,8 @@ import { LinkButton } from "@/components/link-button";
 import { useState } from "react";
 import { useNavigation } from "expo-router";
 
+import { PHONE_NUMBER } from "@env";
+
 export default function Cart() {
   const cartStore = useCartStore();
   const [address, setAddress] = useState("");
@@ -40,14 +42,14 @@ export default function Cart() {
       .map((product) => `\n ${product.quantity} ${product.title}`)
       .join("");
 
-    const message = ` 🍔 NOVO PEDIDO
-      \n Entregar em: ${address}
+    const message = `🍔 NOVO PEDIDO
+      \nEntregar em: ${address}
 
       ${products}
 
-      \n Valor total: ${total}
-    `;
+      \nValor total: ${total}`;
     
+    Linking.openURL(`http://api.whatsapp.com/send?phone=${PHONE_NUMBER}&text=${message}`)
 
     cartStore.clear();
     navigation.goBack()
