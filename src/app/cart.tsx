@@ -37,7 +37,7 @@ export default function Cart() {
     }
 
     const products = cartStore.products
-      .map((product) => `\n %{product.quantity} ${product.title}`)
+      .map((product) => `\n ${product.quantity} ${product.title}`)
       .join("");
 
     const message = ` 🍔 NOVO PEDIDO
